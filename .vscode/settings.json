@@ -1,0 +1,7 @@
+{
+    "C_Cpp.default.compilerPath": "/home/pingon/bosch/GregorianCalendarHtmlGenerator/src/main.c",
+    "files.associations": {
+        "*.css": "tailwindcss",
+        "calendar.h": "c"
+    }
+}
