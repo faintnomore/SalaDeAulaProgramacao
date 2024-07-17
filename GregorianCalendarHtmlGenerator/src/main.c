@@ -45,9 +45,10 @@ int main(int argc, char *argv[]) {
         printYearHTML(file, i);
     }
 
-    // HTML End
+    
     fprintf(file, "</body>\n</html>\n");
-
+    // HTML End
+    
     fclose(file);
 
     printf("Calendar generated successfully in %s\n", filename);
