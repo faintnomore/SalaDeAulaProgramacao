@@ -1,9 +1,25 @@
 #include "../include/calendar.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main(int argc, char *argv[]) {
     
+    clock_t t; 
+    t = clock(); 
+    int reg1 = 100;
+    int *score = &reg1;
+    void **ptr = (void**)&score;
+    printf("reg1: %d\n", reg1);
+    printf("&reg1: %p\n", &reg1);
+    
+    printf("*score: %d\n", *score);
+    printf("&score: %p\n", &score);
+    printf("score: %p\n", score);
+    
+    printf("**ptr: %p\n", *ptr);
+    printf("&ptr: %p\n", &ptr);
+    printf("ptr: %p\n",ptr);
     // Validate input arguments
     if (argc != 3) {
         fprintf(stderr, "Usage: %s <year> <filename>\n", argv[0]);
@@ -45,7 +61,10 @@ int main(int argc, char *argv[]) {
     for (int i = year - 1; i <= year + 1; i++) {
         printYearHTML(file, i);
     }
-
+    clock_t t1 = clock() - t; 
+    double time_taken = ((double)t1)/CLOCKS_PER_SEC; // in seconds 
+ 
+    printf("To func took %f seconds to execute \n", time_taken); 
     
     fprintf(file, "</body>\n</html>\n");
     // HTML End
@@ -53,6 +72,11 @@ int main(int argc, char *argv[]) {
     fclose(file);
 
     printf("Calendar generated successfully in %s\n", filename);
-
+    
+    clock_t t2 = clock() - t;
+    time_taken = ((double)t2)/CLOCKS_PER_SEC; // in seconds 
+ 
+    printf("Code took %f seconds to execute \n", time_taken); 
+    
     return EXIT_SUCCESS;
 }
