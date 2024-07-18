@@ -32,7 +32,8 @@ int main(int argc, char *argv[]) {
         <head>\n\
             <meta charset='UTF-8'>\n\
             <meta content='width=device-width, initial-scale=1.0'>\n\
-            <title>Calendar %d-%d-%d</title>\n\
+            <link rel='stylesheet' href='./style.css' />\n\
+            <title>Calendar %d-%d-%d</title><p>\n\
             <style>\n\
                 table { width: 20%%; height: 20%%; border-collapse: collapse; }\n\
                 th, td { border: 1px solid black; padding: 5px; text-align: center; }\n\

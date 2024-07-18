@@ -4,7 +4,7 @@
 const char *weekdayColor = "style='background-color:white;'";
 const char *saturdayColor = "style='background-color:yellow;'";
 const char *sundayColor = "style='background-color:orange;'";
-const char *weekColor = "style='background-color:gray;'";
+const char *weekColor = "style='background-color:gray; color:white;'";
 const char *monthColor ="style='background-color:white;'";
 
 
