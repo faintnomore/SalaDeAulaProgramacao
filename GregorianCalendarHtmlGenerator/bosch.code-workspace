@@ -1,13 +1,7 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
-	],
-	"settings": {
-		"files.associations": {
-			"*.css": "tailwindcss",
-			"stdlib.h": "c"
-		}
-	}
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
 }
