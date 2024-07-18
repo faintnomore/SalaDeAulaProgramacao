@@ -11,7 +11,7 @@
                 "${workspaceFolder}/src/main.c",
                 "${workspaceFolder}/src/calendar.c",
                 "-o",
-                "${workspaceFolder}/outputs/GregorianCalendarHtmlGenerator"
+                "${workspaceFolder}/outputs/calendar"
             ],
             "group": {
                 "kind": "build",
