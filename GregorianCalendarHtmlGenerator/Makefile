@@ -2,7 +2,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Iinclude -Wall -Wextra -Werror -std=c11
+CFLAGS = -Iinclude -Wall -Wextra -Werror -std=c17
 
 # Target executable
 TARGET = outputs/GregorianCalendarHtmlGenerator
