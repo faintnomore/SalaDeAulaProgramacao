@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/calendar",
-            "args": ["2024", "debug_calendar.html"],
+            "args": ["2024", "./samples/debug_calendar.html"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

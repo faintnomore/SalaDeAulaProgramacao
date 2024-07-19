@@ -31,6 +31,7 @@ void generate_calendar_html(FILE *file, int year);
 void print_execution_time(clock_t start_time);
 
 int main(int argc, char *argv[]) {
+    
     clock_t start_time = clock(); 
 
     int year;
