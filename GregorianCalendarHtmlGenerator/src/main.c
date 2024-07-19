@@ -2,39 +2,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <math.h>
-#include <stdint.h>
-#include <stddef.h>
 
+
+int validate_arguments(int argc, char *argv[], int *year, char **filename);
+
+void generate_calendar_html(FILE *file, int year);
+
+void print_execution_time(clock_t start_time);
 
 int main(int argc, char *argv[]) {
+    clock_t start_time = clock(); 
+
+    int year;
+    char *filename;
     
-    clock_t t; 
-    t = clock();
-   
- 
     // Validate input arguments
-    if (argc != 3) {
-        fprintf(stderr, "Usage: %s <year> <filename>\n", argv[0]);
+    if (validate_arguments(argc, argv, &year, &filename) != 0) {
         return EXIT_FAILURE;
     }
-
-    int year = atoi(argv[1]);
-    if (year < 1583) {
-        fprintf(stderr, "Year must be 1583 or later.\n");
-        return EXIT_FAILURE;
-    }
-
-    char *filename = argv[2];
 
     // Open file for writing
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         perror("Error opening file");
-        return EXIT_FAILURE;
     }
 
-    // HTML Start
+    // Generate HTML content for the calendar
+    generate_calendar_html(file, year);
+    
+    // Close the file
+    fclose(file);
+
+    printf("Calendar generated successfully in %s\n", filename);
+    
+    // Print execution time
+    print_execution_time(start_time);
+
+    return EXIT_SUCCESS;
+}
+
+/**
+ * @brief Validates command-line arguments.
+ * 
+ * @param argc The number of command-line arguments.
+ * @param argv The command-line arguments.
+ * @param year Pointer to an integer where the year will be stored.
+ * @param filename Pointer to a string where the filename will be stored.
+ * 
+ * @return 0 if arguments are valid; -1 if there is an error.
+ */
+int validate_arguments(int argc, char *argv[], int *year, char **filename) {
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <year> <filename>\n", argv[0]);
+        return -1;
+    }
+
+    *year = atoi(argv[1]);
+    if (*year < 1583) {
+        fprintf(stderr, "Year must be 1583 or later.\n");
+        return -1;
+    }
+
+    *filename = argv[2];
+    return 0;
+}
+
+
+/**
+ * @brief Generates the HTML content for the calendar.
+ * 
+ * @param file The file pointer where HTML content will be written.
+ * @param year The year for which the calendar is generated.
+ */
+void generate_calendar_html(FILE *file, int year) {
     fprintf(file, 
         "<!DOCTYPE html>\n\
         <html lang='en'>\n\
@@ -56,16 +96,15 @@ int main(int argc, char *argv[]) {
     }
     
     fprintf(file, "</body>\n</html>\n");
-    // HTML End
-    
-    fclose(file);
+}
 
-    printf("Calendar generated successfully in %s\n", filename);
-    
-    clock_t t2 = clock() - t;
-    double time_taken = ((double)t2)/CLOCKS_PER_SEC; // in seconds 
- 
-    printf("Code took %f seconds to execute \n", time_taken); 
-    
-    return EXIT_SUCCESS;
+/**
+ * @brief Prints the execution time of the program.
+ * 
+ * @param start_time The clock time when the program started.
+ */
+void print_execution_time(clock_t start_time) {
+    clock_t end_time = clock() - start_time;
+    double time_taken = ((double)end_time) / CLOCKS_PER_SEC; // in seconds 
+    printf("Code took %f seconds to execute \n", time_taken);
 }
