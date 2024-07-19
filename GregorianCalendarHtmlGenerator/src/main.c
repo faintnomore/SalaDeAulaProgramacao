@@ -13,7 +13,7 @@
  * 
  * @return 0 if arguments are valid; -1 if there is an error.
  */
-int validate_arguments(int argc, char *argv[], int *year, char **filename);
+int validateArguments(int argc, char *argv[], int *year, char **filename);
 
 /**
  * @brief Generates the HTML content for the calendar.
@@ -21,14 +21,14 @@ int validate_arguments(int argc, char *argv[], int *year, char **filename);
  * @param file The file pointer where HTML content will be written.
  * @param year The year for which the calendar is generated.
  */
-void generate_calendar_html(FILE *file, int year);
+void generateCalendarHtml(FILE *file, int year);
 
 /**
  * @brief Prints the execution time of the program.
  * 
  * @param start_time The clock time when the program started.
  */
-void print_execution_time(clock_t start_time);
+void printExecutionTime(clock_t start_time);
 
 int main(int argc, char *argv[]) {
     
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     char *filename;
     
     // Validate input arguments
-    if (validate_arguments(argc, argv, &year, &filename) != 0) {
+    if (validateArguments(argc, argv, &year, &filename) != 0) {
         return EXIT_FAILURE;
     }
 
@@ -47,18 +47,18 @@ int main(int argc, char *argv[]) {
         perror("Error opening file");
     }
 
-    generate_calendar_html(file, year);
+    generateCalendarHtml(file, year);
 
     fclose(file);
 
     printf("Calendar generated successfully in %s\n", filename);
     
-    print_execution_time(start_time);
+    printExecutionTime(start_time);
 
     return EXIT_SUCCESS;
 }
 
-int validate_arguments(int argc, char *argv[], int *year, char **filename) {
+int validateArguments(int argc, char *argv[], int *year, char **filename) {
     
     if (argc != 3) {
         fprintf(stderr, "Usage: %s <year> <filename>\n", argv[0]);
@@ -75,7 +75,7 @@ int validate_arguments(int argc, char *argv[], int *year, char **filename) {
     return 0;
 }
 
-void generate_calendar_html(FILE *file, int year) {
+void generateCalendarHtml(FILE *file, int year) {
     fprintf(file, 
         "<!DOCTYPE html>\n\
         <html lang='en'>\n\
@@ -95,7 +95,7 @@ void generate_calendar_html(FILE *file, int year) {
     fprintf(file, "</body>\n</html>\n");
 }
 
-void print_execution_time(clock_t start_time) {
+void printExecutionTime(clock_t start_time) {
     clock_t end_time = clock() - start_time;
     double time_taken = ((double)end_time) / CLOCKS_PER_SEC; // seconds 
     printf("Code took %f seconds to execute \n", time_taken);
