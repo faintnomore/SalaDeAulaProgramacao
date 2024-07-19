@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch GFP",
+            "name": "(gdb) Launch Calendar",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/calendar",
-            "args": ["2024","debug_calendar.html" ],
+            "args": ["2024", "debug_calendar.html"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -20,6 +20,33 @@
                 }
             ],
             "preLaunchTask": "build",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "logging": {
+                "trace": true,
+                "traceResponse": true,
+                "engineLogging": true
+            },
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "(gdb) Launch Test Calendar",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/test_calendar",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build-tests",
             "miDebuggerPath": "/usr/bin/gdb",
             "logging": {
                 "trace": true,

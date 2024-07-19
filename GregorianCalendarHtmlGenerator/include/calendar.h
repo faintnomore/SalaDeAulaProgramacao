@@ -14,6 +14,12 @@
 #define SATURDAY 6
 #define SUNDAY 7
 
+//Calendar information
+#define WEEKDAYS 7
+#define WEEKS_YEAR 53
+#define YEAR_DAYS 365
+#define LEAP_YEAR_INTERVAL 4
+
 
 // Months of the Year
 #define JANUARY    1

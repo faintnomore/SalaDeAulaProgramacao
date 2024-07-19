@@ -7,18 +7,62 @@
             "command": "gcc",
             "args": [
                 "-g",
-                "-I${workspaceFolder}/include", // Include the header files directory
+                "-O0",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-std=c11",
+                "-I${workspaceFolder}/include",
+                "-I/usr/include/CUnit",
                 "${workspaceFolder}/src/main.c",
                 "${workspaceFolder}/src/calendar.c",
-                "-o",               
-                "${workspaceFolder}/build/calendar"
+                "-o",
+                "${workspaceFolder}/bin/calendar"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": ["$gcc"],
-            "detail": "Generated task by Debugger."
+            "detail": "Build the main executable."
+        },
+        {
+            "label": "build-tests",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "-O0",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-std=c11",
+                "-I${workspaceFolder}/include",
+                "-I/usr/include/CUnit",
+                "${workspaceFolder}/tests/test_calendar.c",
+                "${workspaceFolder}/build/calendar.o",
+                "-o",
+                "${workspaceFolder}/bin/test_calendar",
+                "-lcunit"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build the test executable."
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Clean up build artifacts."
         }
     ]
 }

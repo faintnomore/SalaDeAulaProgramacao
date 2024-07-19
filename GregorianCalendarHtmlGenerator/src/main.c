@@ -41,27 +41,24 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    // Open file for writing
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
         perror("Error opening file");
     }
 
-    // Generate HTML content for the calendar
     generate_calendar_html(file, year);
-    
-    // Close the file
+
     fclose(file);
 
     printf("Calendar generated successfully in %s\n", filename);
     
-    // Print execution time
     print_execution_time(start_time);
 
     return EXIT_SUCCESS;
 }
 
 int validate_arguments(int argc, char *argv[], int *year, char **filename) {
+    
     if (argc != 3) {
         fprintf(stderr, "Usage: %s <year> <filename>\n", argv[0]);
         return -1;
@@ -103,6 +100,6 @@ void generate_calendar_html(FILE *file, int year) {
 
 void print_execution_time(clock_t start_time) {
     clock_t end_time = clock() - start_time;
-    double time_taken = ((double)end_time) / CLOCKS_PER_SEC; // in seconds 
+    double time_taken = ((double)end_time) / CLOCKS_PER_SEC; // seconds 
     printf("Code took %f seconds to execute \n", time_taken);
 }
