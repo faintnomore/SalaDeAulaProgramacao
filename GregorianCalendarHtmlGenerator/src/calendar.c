@@ -1,20 +1,5 @@
 #include "../include/calendar.h"
 
-// Constants for cell background colors
-const char *weekdayColor = "style='background-color:white;'";
-const char *saturdayColor = "style='background-color:yellow;'";
-const char *sundayColor = "style='background-color:orange;'";
-const char *weekColor = "style='background-color:gray; color:white;'";
-const char *monthColor ="style='background-color:white;'";
-
-
-/**
- * @brief Prints a table cell with a specified day and background color.
- * 
- * @param file Pointer to the output file.
- * @param day The day number to print. If day is 0, an empty cell is printed.
- * @param color The background color style for the cell.
- */
 void printDayCell(FILE *file, int day, const char *color) {
     if (day == 0) {
         fprintf(file, "<td %s></td>", color);
@@ -23,41 +8,20 @@ void printDayCell(FILE *file, int day, const char *color) {
     }
 }
 
-
-/**
- * @brief Prints a table cell with the week number.
- * 
- * @param file Pointer to the output file.
- * @param weekNumber The week number to print.
- */
 void printWeekNumberCell(FILE *file, int weekNumber) {
-    fprintf(file, "<td %s>%d</td>", weekColor, weekNumber);
+    fprintf(file, "<td %s>%d</td>", WEEK_COLOR, weekNumber);
 }
 
-
-/**
- * @brief Prints an empty day cell with the appropriate background color based on the day of the week.
- * 
- * @param file Pointer to the output file.
- * @param dayOfWeek The day of the week (1 = Monday, ..., 7 = Sunday).
- */
 void printEmptyDayCell(FILE *file, int dayOfWeek) {
     if (dayOfWeek == SATURDAY) {
-        printDayCell(file, 0, saturdayColor);
+        printDayCell(file, 0, SATURDAY_COLOR);
     } else if (dayOfWeek == SUNDAY) {
-        printDayCell(file, 0, sundayColor);
+        printDayCell(file, 0, SUNDAY_COLOR);
     } else {
-        printDayCell(file, 0, weekdayColor);
+        printDayCell(file, 0, SUNDAY_COLOR);
     }
 }
 
-
-/**
- * @brief Checks if a given year is a leap year.
- * 
- * @param year The year to check.
- * @return int Returns 1 if the year is a leap year, 0 otherwise.
- */
 int isLeapYear(int year) {
     
     if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
@@ -67,14 +31,6 @@ int isLeapYear(int year) {
     return 0;                
 }
 
-
-/**
- * @brief Uses Zeller's congruence to determine the first day of the month.
- * 
- * @param year The year.
- * @param month The month (1 = January, ..., 12 = December).
- * @return int The day of the week (1 = Monday, ..., 7 = Sunday).
- */
 int getZellerCongruence(int year, int month) {
 
     if (month < MARCH) {
@@ -88,14 +44,6 @@ int getZellerCongruence(int year, int month) {
     return ((h + 5) % 7) + 1;
 }
 
-
-/**
- * @brief Returns the number of days in a given month and year.
- * 
- * @param month The month (1 = January, ..., 12 = December).
- * @param year The year.
- * @return int The number of days in the month.
- */
 int getDaysInMonth(int month, int year) {
 
     const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -107,15 +55,6 @@ int getDaysInMonth(int month, int year) {
     return (month < JANUARY || month > DECEMBER) ? 0 : daysInMonth[month];    
 }
 
-
-/**
- * @brief Calculates the ISO week number for a given date.
- * 
- * @param year The year.
- * @param month The month (1 = January, ..., 12 = December).
- * @param day The day of the month.
- * @return int The ISO week number.
- */
 int getWeekNumber(int year, int month, int day) {
 
     int dayOfYear = 0;
@@ -139,14 +78,6 @@ int getWeekNumber(int year, int month, int day) {
     return weekNumber;
 }
 
-
-/**
- * @brief Prints an HTML table for a given month and year.
- * 
- * @param file Pointer to the output file.
- * @param year The year.
- * @param month The month (1 = January, ..., 12 = December).
- */
 void printMonthHTML(FILE *file, int year, int month) {
 
     const char *monthNames[] = {"January", 
@@ -165,7 +96,6 @@ void printMonthHTML(FILE *file, int year, int month) {
     int firstDay = getZellerCongruence(year, month);
     int daysInMonth = getDaysInMonth(month, year);
 
-     // HTML Table Start for the month
     fprintf(file, "<table border='1'>\n");
     fprintf(file, 
         "<tr>\
@@ -182,7 +112,14 @@ void printMonthHTML(FILE *file, int year, int month) {
             <th %s>Sa</th>\
             <th %s>Su</th>\
         </tr>\n",
-        weekColor, weekColor, weekColor, weekColor, weekColor, weekColor, weekColor, weekColor);
+        WEEK_COLOR, 
+        WEEK_COLOR, 
+        WEEK_COLOR, 
+        WEEK_COLOR, 
+        WEEK_COLOR, 
+        WEEK_COLOR, 
+        WEEK_COLOR, 
+        WEEK_COLOR);
 
     int currentDay = MONDAY;
     int weekNumber = getWeekNumber(year, month, currentDay);
@@ -196,11 +133,11 @@ void printMonthHTML(FILE *file, int year, int month) {
                 printEmptyDayCell(file, dayOfWeek);
             } else {
                 if (dayOfWeek == SATURDAY) {
-                    printDayCell(file, currentDay, saturdayColor);
+                    printDayCell(file, currentDay, SATURDAY_COLOR);
                 } else if (dayOfWeek == SUNDAY) {
-                    printDayCell(file, currentDay, sundayColor);
+                    printDayCell(file, currentDay, SUNDAY_COLOR);
                 } else {
-                    printDayCell(file, currentDay, weekdayColor);
+                    printDayCell(file, currentDay, SUNDAY_COLOR);
                 }
                 currentDay++;
             }
@@ -211,16 +148,9 @@ void printMonthHTML(FILE *file, int year, int month) {
     }
 
     fprintf(file, "</table> <p>\n");
-    // HTML Table End for the month
+
 }
 
-
-/**
- * @brief Prints an HTML table for the entire year.
- * 
- * @param file Pointer to the output file.
- * @param year The year to print.
- */
 void printYearHTML(FILE *file, int year) {
     fprintf(file, "<h1>Year %d</h1>\n", year);
     for (int month = JANUARY; month <= DECEMBER; month++) {
