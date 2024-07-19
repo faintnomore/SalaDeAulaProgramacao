@@ -2,7 +2,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -g -O0 -Wall -Wextra -Werror -std=c11
+CFLAGS = -Wall -Wextra -Werror -std=c17
 INC = -Iinclude -I/usr/include/CUnit
 
 # Target executables

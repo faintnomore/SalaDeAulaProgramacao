@@ -83,10 +83,6 @@ void generate_calendar_html(FILE *file, int year) {
             <meta content='width=device-width, initial-scale=1.0'>\n\
             <link rel='stylesheet' href='./style.css' />\n\
             <title>Calendar %d-%d-%d</title><p>\n\
-            <style>\n\
-                table { width: 20%%; height: 20%%; border-collapse: collapse; }\n\
-                th, td { border: 1px solid black; padding: 5px; text-align: center; }\n\
-            </style>\n\
         </head>\n\
         <body>\n", year-1, year, year+1);
 
