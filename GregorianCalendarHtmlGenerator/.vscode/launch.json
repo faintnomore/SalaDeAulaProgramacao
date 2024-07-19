@@ -5,7 +5,7 @@
             "name": "(gdb) Launch GFP",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/outputs/calendar",
+            "program": "${workspaceFolder}/bin/calendar",
             "args": ["2024","debug_calendar.html" ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

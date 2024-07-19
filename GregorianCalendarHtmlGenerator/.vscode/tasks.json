@@ -11,7 +11,7 @@
                 "${workspaceFolder}/src/main.c",
                 "${workspaceFolder}/src/calendar.c",
                 "-o",
-                "${workspaceFolder}/outputs/calendar"
+                "${workspaceFolder}/build/calendar"
             ],
             "group": {
                 "kind": "build",

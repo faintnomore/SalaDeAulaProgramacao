@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 // Constants for days of the week
 #define MONDAY 1
 #define TUESDAY 2
@@ -12,6 +13,7 @@
 #define FRIDAY 5
 #define SATURDAY 6
 #define SUNDAY 7
+
 
 // Months of the Year
 #define JANUARY    1
@@ -28,15 +30,24 @@
 #define DECEMBER  12
 
 
+// Constants for cell background colors
+#define WEEKDAY_COLOR    "style='background-color:white;'"
+#define SATURDAY_COLOR   "style='background-color:yellow;'"
+#define SUNDAY_COLOR     "style='background-color:orange;'"
+#define WEEK_COLOR       "style='background-color:gray; color:white;'"
+#define MONTH_COLOR      "style='background-color:white;'"
+
+
 // Function declarations
 int isLeapYear(int year);
 int getFirstDayOfMonth(int year, int month);
 int getDaysInMonth(int month, int year);
-int getZellersCongruence(int year, int month, int day);
+int getZellerCongruence(int year, int month);
 void printMonthHTML(FILE *file, int year, int month);
 void printYearHTML(FILE *file, int year);
 void printEmptyDayCell(FILE *file, int dayOfWeek);
 void printWeekNumberCell(FILE *file, int weekNumber);
 void printDayCell(FILE *file, int day, const char *color);
+int getWeekNumber(int year, int month, int day);
 
 #endif // CALENDAR_H

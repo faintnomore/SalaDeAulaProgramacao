@@ -47,7 +47,7 @@ int main() {
 
 void test_printDayCell_empty() {
     FILE *file = fopen("test_output.html", "w");
-    printDayCell(file, 0, weekdayColor);
+    printDayCell(file, 0, WEEKDAY_COLOR);
     fclose(file);
     
     FILE *expected = fopen("expected_output_empty.html", "w");
@@ -59,7 +59,7 @@ void test_printDayCell_empty() {
 
 void test_printDayCell_non_empty() {
     FILE *file = fopen("test_output.html", "w");
-    printDayCell(file, 15, weekdayColor);
+    printDayCell(file, 15, WEEKDAY_COLOR);
     fclose(file);
     
     FILE *expected = fopen("expected_output_non_empty.html", "w");
