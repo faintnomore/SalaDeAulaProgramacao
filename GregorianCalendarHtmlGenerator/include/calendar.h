@@ -27,6 +27,7 @@
 #define NOVEMBER  11
 #define DECEMBER  12
 
+
 // Function declarations
 int isLeapYear(int year);
 int getFirstDayOfMonth(int year, int month);

@@ -3,12 +3,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <stdint.h>
+#include <stddef.h>
+
 
 int main(int argc, char *argv[]) {
     
     clock_t t; 
-    t = clock(); 
-
+    t = clock();
+   
+ 
     // Validate input arguments
     if (argc != 3) {
         fprintf(stderr, "Usage: %s <year> <filename>\n", argv[0]);
@@ -50,7 +54,6 @@ int main(int argc, char *argv[]) {
     for (int i = year - 1; i <= year + 1; i++) {
         printYearHTML(file, i);
     }
-
     
     fprintf(file, "</body>\n</html>\n");
     // HTML End

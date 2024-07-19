@@ -3,5 +3,15 @@
         {
             "path": "."
         }
-    ]
+    ],
+    "settings": {
+        "files.associations": {
+            "*.css": "tailwindcss",
+            "stdint.h": "c",
+            "stddef.h": "c",
+            "stdint-gcc.h": "c",
+            "types.h": "c",
+            "stdio.h": "c"
+        }
+    }
 }
