@@ -40,7 +40,6 @@
 
 // Function declarations
 int isLeapYear(int year);
-int getFirstDayOfMonth(int year, int month);
 int getDaysInMonth(int month, int year);
 int getZellerCongruence(int year, int month);
 void printMonthHTML(FILE *file, int year, int month);
@@ -49,5 +48,6 @@ void printEmptyDayCell(FILE *file, int dayOfWeek);
 void printWeekNumberCell(FILE *file, int weekNumber);
 void printDayCell(FILE *file, int day, const char *color);
 int getWeekNumber(int year, int month, int day);
+
 
 #endif // CALENDAR_H

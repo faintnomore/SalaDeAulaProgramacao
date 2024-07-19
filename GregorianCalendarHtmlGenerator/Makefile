@@ -5,44 +5,35 @@ CC = gcc
 CFLAGS = -g -O0 -Wall -Wextra -Werror -std=c11
 INC = -Iinclude -I/usr/include/CUnit
 
-# Library flags
-LDFLAGS = -lcunit
-
-# Target executable for the main application
-TARGET = bin/GregorianCalendarHtmlGenerator
-
-# Target executable for the test
+# Target executables
+TARGET = bin/calendar
 TEST_TARGET = bin/test_calendar
 
-# Source files for the main application
+# Source files
 SRCS = src/main.c src/calendar.c
-
-# Source files for the tests
 TEST_SRCS = tests/test_calendar.c
 
-# Object files for the main application
-OBJS = $(SRCS:.c=.o)
-
-# Object files for the tests
-TEST_OBJS = $(TEST_SRCS:.c=.o)
+# Object files (automatically generated from SRCS)
+OBJS = $(SRCS:src/%.c=build/%.o)
+TEST_OBJS = $(TEST_SRCS:tests/%.c=build/%.o) build/calendar.o
 
 # Default target
 all: $(TARGET)
 
-# Linking for main application
+# Linking for the main executable
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
 
-# Compilation rule for main application
-%.o: %.c
+# Linking for the test executable
+$(TEST_TARGET): $(TEST_OBJS)
+	$(CC) $(TEST_OBJS) -o $(TEST_TARGET) -lcunit
+
+# Compilation rule for source files
+build/%.o: src/%.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-# Linking for tests
-test: $(TEST_OBJS)
-	$(CC) $(TEST_OBJS) -o $(TEST_TARGET) $(LDFLAGS)
-
-# Compilation rule for tests
-%.o: %.c
+# Compilation rule for test source files
+build/%.o: tests/%.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Clean up
@@ -51,3 +42,7 @@ clean:
 
 # Phony targets
 .PHONY: all clean test
+
+# Run tests
+test: $(TEST_TARGET)
+	$(TEST_TARGET)
