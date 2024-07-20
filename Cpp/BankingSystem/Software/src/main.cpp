@@ -1,11 +1,18 @@
-/*** 
- * @file main.cpp
- * @brief Main entry point for the Banking System application.
- * 
- * This file contains the main function and the implementation of the
- * menu-driven interface for managing customers, accounts, and transactions
- * in the banking system. It also handles database connections and interactions.
- */
+
+#include <iostream>
+#include <mysql_driver.h>
+#include <mysql_connection.h>
+#include <cppconn/statement.h>
+#include <cppconn/resultset.h>
+#include "Customer.h"
+#include "Account.h"
+#include "Transaction.h"
+#include "BankingServices.h"
+#include <spdlog/spdlog.h>
+#include <ncurses.h>
+
+sql::mysql::MySQL_Driver *driver;
+sql::Connection *con;
 
 /***
  * @brief Establishes a connection to the MySQL database.
@@ -59,7 +66,8 @@ int displayMenu() {
     printw("9. Transfer\n");
     printw("10. View Account Details\n");
     printw("11. View Transaction History\n");
-    printw("12. Exit\n");
+    printw("12. List Accounts\n");  // Added option for listing accounts
+    printw("13. Exit\n");
 
     refresh();            // Refresh the screen to show the output
 
@@ -86,9 +94,14 @@ int displayMenu() {
             if (getch() == '1') return 11;
             break;
         }
-        case 'e': {
+        case 'l': {
             // Handle '12' separately
             if (getch() == '2') return 12;
+            break;
+        }
+        case 'e': {
+            // Handle '13' separately
+            if (getch() == '3') return 13;
             break;
         }
         default: return -1; // Invalid choice
@@ -96,6 +109,7 @@ int displayMenu() {
 
     return -1; // If no valid choice
 }
+
 
 /***
  * @brief Main function for the Banking System application.
@@ -117,13 +131,13 @@ int main() {
 
     while (true) {
         choice = displayMenu();
-        if (choice == 12) {
+        if (choice == 13) {
             spdlog::info("Exiting Banking System...");
             break;
         }
 
         int id;
-        std::string name, address, contact, type;
+        std::string name, address, contact, type, phone_number;
         double amount;
         Customer customer;
         Account account;
@@ -236,6 +250,13 @@ int main() {
                 std::cout << "Enter account ID to view transaction history: ";
                 std::cin >> id;
                 services.viewTransactionHistory(id);
+                break;
+
+            case 12:
+                std::cout << "Enter phone number to filter by (or press Enter to list all): ";
+                std::cin.ignore();  // Ignore leftover newline character
+                std::getline(std::cin, phone_number);
+                account.listAccounts(phone_number);
                 break;
 
             default:

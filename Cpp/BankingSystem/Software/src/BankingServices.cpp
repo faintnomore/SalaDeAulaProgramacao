@@ -10,7 +10,17 @@
 extern sql::mysql::MySQL_Driver *driver;
 extern sql::Connection *con;
 
-void BankingServices::deposit(int account_id, double amount) {
+BankingServices::BankingServices()
+{
+}
+
+BankingServices::~BankingServices()
+{
+    delete con;
+}
+
+void BankingServices::deposit(int account_id, double amount)
+{
     connectToDatabase();
     sql::PreparedStatement *pstmt;
     pstmt = con->prepareStatement("UPDATE Accounts SET balance = balance + ? WHERE account_id = ?");

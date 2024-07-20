@@ -6,7 +6,13 @@
 extern sql::mysql::MySQL_Driver *driver;
 extern sql::Connection *con;
 
-void Customer::addCustomer() {
+Customer::~Customer()
+{
+    delete con;
+}
+
+void Customer::addCustomer()
+{
     connectToDatabase();
     sql::PreparedStatement *pstmt;
     pstmt = con->prepareStatement("INSERT INTO Customers (name, address, contact_info) VALUES (?, ?, ?)");

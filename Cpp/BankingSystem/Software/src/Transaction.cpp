@@ -7,7 +7,17 @@
 extern sql::mysql::MySQL_Driver *driver;
 extern sql::Connection *con;
 
-void Transaction::recordTransaction() {
+/**
+ * @brief Destroy the Transaction:: Transaction object
+ * 
+ */
+Transaction::~Transaction()
+{
+    delete con;
+}
+
+void Transaction::recordTransaction()
+{
     connectToDatabase();
     sql::PreparedStatement *pstmt;
     pstmt = con->prepareStatement("INSERT INTO Transactions (transaction_type, amount, date, source_account, destination_account) VALUES (?, ?, ?, ?, ?)");
