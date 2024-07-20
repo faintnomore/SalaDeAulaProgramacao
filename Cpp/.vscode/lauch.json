@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug C++",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/my_sql_connector_example",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "ignoreFailures": true,
+                    "text": "-enable-pretty-printing"
+                }
+            ],
+            "preLaunchTask": "CMake Build",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "internalConsoleOptions": "openOnSessionStart",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+        }
+    ]
+}

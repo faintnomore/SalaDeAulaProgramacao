@@ -1,0 +1,3 @@
+/home/pingon/SalaDeAulaProgramacao/Cpp/BankingSystem/Software/build/CMakeFiles/BankingSystem.dir
+/home/pingon/SalaDeAulaProgramacao/Cpp/BankingSystem/Software/build/CMakeFiles/edit_cache.dir
+/home/pingon/SalaDeAulaProgramacao/Cpp/BankingSystem/Software/build/CMakeFiles/rebuild_cache.dir
