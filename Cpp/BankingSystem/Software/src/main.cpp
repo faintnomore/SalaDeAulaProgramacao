@@ -1,18 +1,19 @@
-#include <iostream>
-#include <mysql_driver.h>
-#include <mysql_connection.h>
-#include <cppconn/statement.h>
-#include <cppconn/resultset.h>
-#include "Customer.h"
-#include "Account.h"
-#include "Transaction.h"
-#include "BankingServices.h"
-#include <spdlog/spdlog.h>
-#include <ncurses.h>
+/*** 
+ * @file main.cpp
+ * @brief Main entry point for the Banking System application.
+ * 
+ * This file contains the main function and the implementation of the
+ * menu-driven interface for managing customers, accounts, and transactions
+ * in the banking system. It also handles database connections and interactions.
+ */
 
-sql::mysql::MySQL_Driver *driver;
-sql::Connection *con;
-
+/***
+ * @brief Establishes a connection to the MySQL database.
+ * 
+ * This function attempts to connect to the MySQL database using the
+ * specified connection parameters. It sets the schema to "banking_system".
+ * If the connection fails, it logs an error message and terminates the program.
+ */
 void connectToDatabase() {
     try {
         driver = sql::mysql::get_mysql_driver_instance();
@@ -24,6 +25,15 @@ void connectToDatabase() {
     }
 }
 
+/***
+ * @brief Displays the main menu and captures user input.
+ * 
+ * This function uses ncurses to display a menu with options for various
+ * banking operations. It captures the user's choice and returns it as an
+ * integer value. If the user enters an invalid choice, it returns -1.
+ * 
+ * @return int The user's menu choice.
+ */
 int displayMenu() {
     initscr();            // Start ncurses mode
     if (has_colors() == FALSE) {
@@ -87,6 +97,16 @@ int displayMenu() {
     return -1; // If no valid choice
 }
 
+/***
+ * @brief Main function for the Banking System application.
+ * 
+ * This function initializes the application by connecting to the database
+ * and then enters a loop to display the menu and process user choices. It
+ * performs operations related to customers, accounts, and transactions based
+ * on user input. It exits when the user selects the option to exit.
+ * 
+ * @return int Exit status of the program.
+ */
 int main() {
     connectToDatabase();
 
