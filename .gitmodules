@@ -1,0 +1,3 @@
+[submodule "Cpp/BankingSystem/Software/spdlog"]
+	path = Cpp/BankingSystem/Software/spdlog
+	url = https://github.com/gabime/spdlog.git
